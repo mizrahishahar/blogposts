@@ -4,8 +4,11 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"html/template"
 	"io"
 	"strings"
+
+	"github.com/russross/blackfriday/v2"
 )
 
 type Post struct {
@@ -46,7 +49,16 @@ func readBody(scanner *bufio.Scanner) string {
 	return strings.TrimSuffix(buf.String(), "\n")
 }
 
+func (p Post) SanitisedTitle() string {
+	return strings.ToLower(strings.Replace(p.Title, " ", "-", -1))
+}
+
+func (p Post) MarkdownToHTML() template.HTML {
+    return template.HTML(blackfriday.Run([]byte(p.Body)))
+}
+
 func stringToArray(input string) []string {
     result := strings.Split(input, ", ")
     return result
 }
+

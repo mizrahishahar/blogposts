@@ -5,7 +5,7 @@ import (
 	"testing"
 	"testing/fstest"
 
-	blogposts "github.com/mizrahishahar/blogposts"
+	blogposts "github.com/mizrahishahar/blogposts/blogposts"
 )
 
 func TestNewBlogPosts(t *testing.T) {
